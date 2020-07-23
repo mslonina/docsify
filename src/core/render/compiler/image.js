@@ -38,7 +38,7 @@ export const imageCompiler = ({ renderer, contentBase, router }) =>
       url = getPath(contentBase, getParentPath(router.getCurrentPath()), href);
     }
 
-    let out = `<figure>`;
+    let out = '';
     if (attrs.length > 0) {
       out += `<img src="${url}" data-origin="${href}" alt="${text}" ${attrs.join(
         ' '
@@ -47,11 +47,9 @@ export const imageCompiler = ({ renderer, contentBase, router }) =>
       out += `<img src="${url}" data-origin="${href}" alt="${text}"${attrs}>`;
     }
 
-    if (title) {
-      out += `<figcaption>${title}</figcaption>`;
+    if (!config['no-caption']) {
+      out = `<figure>${out}<figcaption>${title}</figcaption></figure>`;
     }
-
-    out += `</figure>`;
 
     return out;
   });
