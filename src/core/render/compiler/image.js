@@ -44,7 +44,7 @@ export const imageCompiler = ({ renderer, contentBase, router }) =>
         ' '
       )} />`;
     } else {
-      out += `<img src="${url}" data-origin="${href}" alt="${text}"${attrs}>`;
+      out += `<img src="${url}" data-origin="${href}" alt="${text}" ${attrs} />`;
     }
 
     if (!config['no-caption']) {
