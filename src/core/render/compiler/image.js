@@ -38,11 +38,20 @@ export const imageCompiler = ({ renderer, contentBase, router }) =>
       url = getPath(contentBase, getParentPath(router.getCurrentPath()), href);
     }
 
+    let out = `<figure>`;
     if (attrs.length > 0) {
-      return `<img src="${url}" data-origin="${href}" alt="${text}" ${attrs.join(
+      out += `<img src="${url}" data-origin="${href}" alt="${text}" ${attrs.join(
         ' '
       )} />`;
+    } else {
+      out += `<img src="${url}" data-origin="${href}" alt="${text}"${attrs}>`;
     }
 
-    return `<img src="${url}" data-origin="${href}" alt="${text}"${attrs}>`;
+    if (title) {
+      out += `<figcaption>${title}</figcaption>`;
+    }
+
+    out += `</figure>`;
+
+    return out;
   });
